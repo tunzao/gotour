@@ -79,6 +79,31 @@ func deferState() {
 
 }
 
+func pointerDemo() {
+	i, j := 12, 34
+
+	p := &i
+	fmt.Println(*p)
+	*p = 100
+	fmt.Println(i)
+
+	p = &j
+	fmt.Println(*p)
+	*p = *p / 10
+	fmt.Println(j)
+}
+
+func Pic(dx, dy int) [][]uint8 {
+	pic := make([][]uint8, dy)
+	for i := 0; i < dy; i++ {
+		pic[i] = make([]uint8, dy)
+		for j := 0; j < dy; j++ {
+			pic[i][j] = uint8(i * j)
+		}
+	}
+	return pic
+}
+
 func main() {
 	fmt.Println("My favorite number is", rand.Intn(10))
 
@@ -115,5 +140,8 @@ func main() {
 	fmt.Println()
 
 	deferState()
+	fmt.Println()
 
+	pointerDemo()
+	fmt.Println()
 }
