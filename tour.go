@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"runtime"
 )
 
 const (
@@ -53,6 +54,31 @@ func Sqrt(x float64) float64 {
 	return z
 }
 
+func osinfo() {
+	fmt.Print("go runs on ")
+	switch os := runtime.GOOS; os {
+	case "darwin":
+		fmt.Println("macos.")
+		// break statement is automatically provided by GO
+	case "linux":
+		fmt.Println("Linux.")
+	default:
+		fmt.Printf("%s.\n", os)
+	}
+}
+
+// the defer statement defers the execution of a function until the surround function returns.
+// what's surround function?!
+func deferState() {
+	fmt.Println("counting")
+
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
+	}
+	fmt.Println("done.")
+
+}
+
 func main() {
 	fmt.Println("My favorite number is", rand.Intn(10))
 
@@ -79,7 +105,15 @@ func main() {
 	fmt.Println(needInt(Small))
 	fmt.Println(needFloat(Small))
 	fmt.Println(needFloat(Big))
+	fmt.Println()
 
 	println(math.Sqrt(4) - Sqrt(4))
 	println(math.Sqrt(2) - Sqrt(2))
+	fmt.Println()
+
+	osinfo()
+	fmt.Println()
+
+	deferState()
+
 }
