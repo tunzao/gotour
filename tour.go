@@ -6,6 +6,7 @@ import (
 	"math"
 	"math/rand"
 	"runtime"
+	"strings"
 )
 
 const (
@@ -104,6 +105,34 @@ func Pic(dx, dy int) [][]uint8 {
 	return pic
 }
 
+func WordCount(s string) map[string]int {
+	fields := strings.Fields(s)
+	wc := make(map[string]int)
+	for _, field := range fields {
+		value, _ := wc[field]
+		value++
+		wc[field] = value
+	}
+	return wc
+}
+
+func fibonacci() func() int {
+	x, y, n := 0, 1, 0
+	return func() int {
+		n++
+		switch n - 1 {
+		case 0:
+			return 0
+		case 1:
+			return 1
+		default:
+			r := x + y
+			x, y = y, r
+			return r
+		}
+	}
+}
+
 func main() {
 	fmt.Println("My favorite number is", rand.Intn(10))
 
@@ -144,4 +173,11 @@ func main() {
 
 	pointerDemo()
 	fmt.Println()
+
+	fmt.Println(WordCount("hello world is everything ok ok"))
+
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
 }
