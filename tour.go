@@ -42,6 +42,17 @@ func split(sum int) (x, y int) {
 	return
 }
 
+func Sqrt(x float64) float64 {
+	z, loop := x/2, 0
+
+	for pre := 0.0; math.Abs(z-pre) >= 0.00001; loop++ {
+		pre = z
+		z -= (z*z - x) / (2 * z)
+	}
+	fmt.Println("loop taken", loop)
+	return z
+}
+
 func main() {
 	fmt.Println("My favorite number is", rand.Intn(10))
 
@@ -68,4 +79,7 @@ func main() {
 	fmt.Println(needInt(Small))
 	fmt.Println(needFloat(Small))
 	fmt.Println(needFloat(Big))
+
+	println(math.Sqrt(4) - Sqrt(4))
+	println(math.Sqrt(2) - Sqrt(2))
 }
